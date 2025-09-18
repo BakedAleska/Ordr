@@ -416,4 +416,12 @@ Main.Entry:GetPropertyChangedSignal("Text"):Connect(function()
 	end
 end)
 
+Main.Entry.FocusLost:Connect(function(EnterPressed)
+	if EnterPressed then
+		return
+	end
+
+	Controller:Enable(false)
+end)
+
 return Controller
