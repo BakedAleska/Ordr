@@ -1,0 +1,11 @@
+{
+  "name": "Ordr",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Ordr": {
+        "$path": "src/Ordr"
+      }
+    }
+  }
+}
