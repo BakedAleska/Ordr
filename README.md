@@ -2,6 +2,8 @@
 Ordr is a lightweight, extensible moderator panel for Roblox — inspired by [evaera’s Cmdr](https://github.com/evaera/Cmdr).  
 It provides a consistent way to register, parse, and execute commands securely, with execution logic kept on the server.
 
+This is my first attempt at releasing something like this publicly, so any and all constructive criticism is appreciated!
+
 ---
 
 ## Features
