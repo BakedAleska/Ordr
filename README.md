@@ -18,22 +18,49 @@ This is my first attempt at releasing something like this publicly, so any and a
 ## Example Command
 
 ```lua
+--!nonstrict
+
+local Players = game:GetService("Players")
+
+-- Execution (Execution/Kick.lua)
 return {
-    ["Kick"] = {
-        Description = "Kick a player.",
-        Level = "Moderator",
-        Aliases = { "Remove", "Force" },
-        Parameters = {
-            {
-                Name = "Player",
-                Description = "The player who will be kicked.",
-                List = "Players",
-                Alternate = { "All" },
-            },
-            {
-                Name = "Reason",
-                Description = "Optional reason for kicking.",
-            }
-        }
-    }
+	["Kick"] = {
+		Level = "Moderator",
+		Run = function(Executor: Player, Target: Player, Text: string?)
+			local Reason = Text or "No reason provided"
+
+			if typeof(Target) == "string" and Target == "All" then
+				for _, Listed in pairs(Players:GetPlayers()) do
+					Listed:Kick("Kicked by: " .. Executor.Name .. " | Reason: " .. Reason)
+				end
+				return
+			end
+
+			Target:Kick("Kicked by: " .. Executor.Name .. " | Reason: " .. Reason)
+		end,
+	},
+}
+
+-- Info (Info/Kick.lua)
+return {
+	["Kick"] = {
+		Description = "Kick a player.",
+		Level = "Moderator", --> Refers to the minimum level needed to run this command.
+		Aliases = { "Remove", "Force" },
+		Parameters = {
+			{
+				Name = "Target",
+				Description = "The target who will be kicked.",
+				List = "Players",
+				Type = "Player",
+				Alternate = { "All" }, --> Either type a player’s name or the alternate argument "All".
+			},
+			{
+				Name = "Reason",
+				Type = "string",
+				Description = "The reason displayed when the player is kicked.",
+				Optional = true, --> This parameter is optional.
+			},
+		},
+	}
 }
