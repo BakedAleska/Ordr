@@ -5,11 +5,9 @@
 --------------
 -- SERVICES --
 --------------
-local CollectionService = game:GetService("CollectionService")
 local GuiService = game:GetService("GuiService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 
 ------------
@@ -369,6 +367,10 @@ function Controller:Hook(Input, GameProcessedEvent)
 
 	if self.Registry and self.Registry.ActivationKeys and self.Registry.ActivationKeys[Input.KeyCode] then
 		self:Enable(not Ordr.Enabled)
+	end
+
+	if not Ordr.Enabled then
+		return
 	end
 
 	if Input.KeyCode == Enum.KeyCode.Return or Input.KeyCode == Enum.KeyCode.KeypadEnter then
