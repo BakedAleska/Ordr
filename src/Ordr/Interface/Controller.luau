@@ -92,7 +92,7 @@ function Controller:Autofill()
 		return
 	end
 
-	if self.Command == "" then
+	if self.Command == "" or not self.Registry.Info[self.Command] then
 		self.Command = self.Selection
 	end
 
@@ -170,6 +170,7 @@ function Controller:Suggest()
 	else
 		-- Suggest lists if command has parameters
 		local Cmd = self.Registry.Info[self.Command]
+		print(self.Command)
 		if not Cmd then
 			warn("[Controller] No such matching command.")
 			return
@@ -355,9 +356,10 @@ function Controller:Send()
 
 	Network.Send("Command", Main.Entry.Text)
 
-	Main.Entry:CaptureFocus()
 	Main.Entry.Text = ""
-	Main.Entry.CursorPosition = 1
+	task.delay(0.05, function()
+		Main.Entry.CursorPosition = 1
+	end)
 end
 
 function Controller:Hook(Input, GameProcessedEvent)
